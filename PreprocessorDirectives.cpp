@@ -3,31 +3,44 @@
 
 #include <iostream>
 
-#define MODE 5
+#define MODE 1
 
+#if MODE == 1
 int add(int num_1, int num_2)
 {
-    return num_1 + num_2;
+    int res = num_1 + num_2;
+    return res;
 }
+#endif
 
 int main()
 {
+#if !defined MODE
+#error Необходимо определить MODE
+#endif
+#if defined MODE
     setlocale(LC_ALL, "Rus");
-#if MODE == 0
+#if (MODE == 0)
     std::cout << "Работаю в режиме тренировки." << std::endl;
-#elif MODE == 1
+#elif (MODE == 1)
     int num_1 = 0, num_2 = 0;
+    
     std::cout << "Работаю в боевом режиме" << std::endl;
     std::cout << "Введите число 1: ";
     std::cin >> num_1;
     std::cout << "Введите число 2: ";
-    std::cin >> num_2;
+    std::cin >> num_2;        
     std::cout << "Результат сложения: " << add(num_1, num_2);
 #else
     std::cout << "Неизвестный режим. Завершение работы" << std::endl;
+#endif    
 #endif
     return 0;
 }
+
+
+
+
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
